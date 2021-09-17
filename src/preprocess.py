@@ -1,0 +1,70 @@
+'''Preprocess data'''
+
+from datasets import Dataset
+from .labels import NER_LABELS
+
+
+def ner_preprocess_data(dataset: Dataset, tokenizer) -> Dataset:
+    '''Preprocess a dataset to NER by tokenizing and aligning the labels.
+
+    Args:
+        dataset (HuggingFace dataset):
+            The dataset to preprocess.
+        tokenizer (HuggingFace tokenizer):
+            A pretrained tokenizer.
+
+    Returns:
+        HuggingFace dataset: The preprocessed dataset.
+    '''
+
+    label2id = {lbl: idx for idx, lbl in enumerate(NER_LABELS)}
+
+    def tokenize_and_align_labels(examples: dict):
+        '''Tokenise all texts and align the labels with them.
+
+        Args:
+            examples (dict):
+                The examples to be tokenised.
+
+        Returns:
+            dict:
+                A dictionary containing the tokenized data as well as labels.
+        '''
+        tokenized_inputs = tokenizer(
+            examples['tokens'],
+            # We use this argument because the texts in our dataset are lists
+            # of words (with a label for each word)
+            is_split_into_words=True,
+        )
+        all_labels = []
+        for i, labels in enumerate(examples['orig_labels']):
+            word_ids = tokenized_inputs.word_ids(batch_index=i)
+            previous_word_idx = None
+            label_ids = []
+            for word_idx in word_ids:
+
+                # Special tokens have a word id that is None. We set the label
+                # to -100 so they are automatically ignored in the loss
+                # function
+                if word_idx is None:
+                    label_ids.append(-100)
+
+                # We set the label for the first token of each word
+                elif word_idx != previous_word_idx:
+                    label = labels[word_idx]
+                    label_id = label2id[label]
+                    label_ids.append(label_id)
+
+                # For the other tokens in a word, we set the label to -100
+                else:
+                    label_ids.append(-100)
+
+                previous_word_idx = word_idx
+
+            all_labels.append(label_ids)
+        tokenized_inputs['labels'] = all_labels
+        return tokenized_inputs
+
+    map_fn = tokenize_and_align_labels
+    tokenised_dataset = dataset.map(map_fn, batched=True)
+    return tokenised_dataset
