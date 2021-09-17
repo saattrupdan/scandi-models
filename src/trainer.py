@@ -5,6 +5,7 @@ from typing import Tuple
 from datasets import Dataset
 import logging
 import transformers.utils.logging as tf_logging
+from scandeval import load_dataset
 from transformers import (Trainer,
                           TrainingArguments,
                           DataCollatorForTokenClassification,
@@ -32,7 +33,7 @@ def get_ner_trainer(df: pd.DataFrame,
 
     Returns:
         tuple:
-            A pair of a trainer and the evaluation dataset, for evaluating the
+            A pair of a trainer and the test dataset, for evaluating the
             performance after training.
     '''
     # Load model and tokenizer
@@ -85,5 +86,14 @@ def get_ner_trainer(df: pd.DataFrame,
                       compute_metrics=ner_compute_metrics,
                       callbacks=[early_stopping])
 
+    # Set up test dataset
+    _, dane_X_test, _, dane_y_test = load_dataset('dane')
+    test_df = pd.concat((dane_X_test, dane_y_test), axis=1)
+    test_dataset_dct = dict(doc=test_df.doc,
+                            tokens=test_df.tokens,
+                            orig_labels=test_df.ner_tags)
+    test_dataset = Dataset.from_dict(test_dataset_dct)
+    test_dataset = ner_preprocess_data(test_dataset, tokenizer)
+
     # Return the trainer, the training dataset and the validation dataset
-    return trainer, split['test']
+    return trainer, test_dataset
