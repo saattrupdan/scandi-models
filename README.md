@@ -1,1 +1,3 @@
-# scandi-models
+# ScandiModels
+
+Finetuning Scandinavian models.
