@@ -14,6 +14,7 @@ from transformers import (Trainer,
 from .model import get_ner_model
 from .preprocess import ner_preprocess_data
 from .compute_metrics import ner_compute_metrics
+from .labels import NER_LABELS
 
 
 logging_fmt = '%(asctime)s [%(levelname)s] %(message)s'
@@ -65,6 +66,7 @@ def get_ner_trainer(df: pd.DataFrame,
         warmup_steps=len(dataset) * 0.9,
         gradient_accumulation_steps=4,
         load_best_model_at_end=True,
+        label_names=NER_LABELS,
         push_to_hub=True,
         push_to_hub_model_id='nbailab-base-scandi-ner',
         push_to_hub_token='api_RwLXgxcFezhynxMyPFTLLQpWqsztgGITUV'
