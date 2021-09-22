@@ -63,8 +63,11 @@ def get_ner_trainer(df: pd.DataFrame,
         learning_rate=2e-5,
         num_train_epochs=1000,
         warmup_steps=len(dataset) * 0.9,
-        gradient_accumulation_steps=1,
-        load_best_model_at_end=True
+        gradient_accumulation_steps=4,
+        load_best_model_at_end=True,
+        push_to_hub=True,
+        push_to_hub_model_id='nbailab-base-scandi-ner',
+        push_to_hub_token='api_RwLXgxcFezhynxMyPFTLLQpWqsztgGITUV'
     )
 
     # Split the dataset into a training and validation dataset
