@@ -68,8 +68,7 @@ def get_ner_trainer(df: pd.DataFrame,
         load_best_model_at_end=True,
         label_names=NER_LABELS,
         push_to_hub=True,
-        push_to_hub_model_id='nbailab-base-scandi-ner',
-        push_to_hub_token='api_RwLXgxcFezhynxMyPFTLLQpWqsztgGITUV'
+        push_to_hub_model_id='nbailab-base-scandi-ner'
     )
 
     # Split the dataset into a training and validation dataset
