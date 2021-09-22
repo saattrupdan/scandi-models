@@ -18,7 +18,7 @@ from .compute_metrics import ner_compute_metrics
 
 logging_fmt = '%(asctime)s [%(levelname)s] %(message)s'
 logger = logging.getLogger(__name__)
-tf_logging.set_verbosity_error()
+#tf_logging.set_verbosity_error()
 
 
 def get_ner_trainer(df: pd.DataFrame,
