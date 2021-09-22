@@ -53,7 +53,7 @@ def get_ner_trainer(df: pd.DataFrame,
 
     # Set up training arguments
     training_args = TrainingArguments(
-        output_dir='.',
+        output_dir='nbailab-base-scandi-ner',
         evaluation_strategy='epoch',
         logging_strategy='epoch',
         save_strategy='epoch',
@@ -67,8 +67,7 @@ def get_ner_trainer(df: pd.DataFrame,
         gradient_accumulation_steps=4,
         load_best_model_at_end=True,
         label_names=NER_LABELS,
-        push_to_hub=True,
-        push_to_hub_model_id='nbailab-base-scandi-ner'
+        push_to_hub=True
     )
 
     # Split the dataset into a training and validation dataset
