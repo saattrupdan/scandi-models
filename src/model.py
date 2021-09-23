@@ -21,7 +21,7 @@ def get_ner_model(model_id: str) -> Tuple[PreTrainedModel,
             The pretrained model and the pretrained tokenizer
     '''
     config = dict(num_labels=len(NER_LABELS),
-                  id2label=NER_LABELS,
+                  id2label={id:lbl for id, lbl in enumerate(NER_LABELS)},
                   label2id={lbl:id for id, lbl in enumerate(NER_LABELS)})
     config = AutoConfig.from_pretrained(model_id, **config)
     tokenizer = AutoTokenizer.from_pretrained(model_id)
