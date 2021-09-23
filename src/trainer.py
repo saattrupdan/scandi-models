@@ -22,14 +22,17 @@ logger = logging.getLogger(__name__)
 
 
 def get_ner_trainer(df: pd.DataFrame,
-                    model_id: str) -> Tuple[Trainer, Dataset]:
+                    pretrained_model_id: str,
+                    new_model_id: str) -> Tuple[Trainer, Dataset]:
     '''Prepare data for training.
 
     Args:
         df (Pandas DataFrame):
             Input data, with columns 'doc', 'token' and 'ner_tags'.
-        model_id (str):
+        pretrained_model_id (str):
             The model ID of a pretrained model.
+        new_model_id (str):
+            The model ID of the new finetuned model.
 
     Returns:
         tuple:
@@ -38,7 +41,7 @@ def get_ner_trainer(df: pd.DataFrame,
     '''
     # Load model and tokenizer
     logger.info('Loading model')
-    model, tokenizer = get_ner_model(model_id)
+    model, tokenizer = get_ner_model(pretrained_model_id)
 
     # Convert dataframe to HuggingFace Dataset
     dataset_dct = dict(doc=df.doc,
@@ -52,7 +55,7 @@ def get_ner_trainer(df: pd.DataFrame,
 
     # Set up training arguments
     training_args = TrainingArguments(
-        output_dir='nbailab-base-scandi-ner',
+        output_dir=new_model_id,
         evaluation_strategy='epoch',
         logging_strategy='epoch',
         save_strategy='epoch',
