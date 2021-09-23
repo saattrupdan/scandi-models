@@ -36,8 +36,7 @@ def ner_preprocess_data(dataset: Dataset, tokenizer) -> Dataset:
             # of words (with a label for each word)
             is_split_into_words=True,
             truncation=True,
-            max_length=512,
-            padding='max_length'
+            max_length=512
         )
         all_labels = []
         for i, labels in enumerate(examples['orig_labels']):
