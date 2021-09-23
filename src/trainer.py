@@ -67,6 +67,7 @@ def get_ner_trainer(df: pd.DataFrame,
         num_train_epochs=1000,
         warmup_steps=len(dataset) * 0.9,
         gradient_accumulation_steps=4,
+        metric_for_best_model='micro_f1',
         load_best_model_at_end=True,
         push_to_hub=True
     )
