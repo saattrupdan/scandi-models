@@ -98,8 +98,7 @@ def get_ner_trainer(df: pd.DataFrame,
                             tokens=test_df.tokens,
                             orig_labels=test_df.ner_tags)
     test_dataset = Dataset.from_dict(test_dataset_dct)
-    test_dataset = ner_preprocess_data(test_dataset, tokenizer,
-                                       only_label_first_subtoken=True)
+    test_dataset = ner_preprocess_data(test_dataset, tokenizer)
 
     # Return the trainer, the training dataset and the validation dataset
     return trainer, test_dataset

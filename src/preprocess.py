@@ -6,7 +6,7 @@ from .labels import NER_LABELS
 
 def ner_preprocess_data(dataset: Dataset,
                         tokenizer,
-                        only_label_first_subtoken: bool = False) -> Dataset:
+                        only_label_first_subtoken: bool = True) -> Dataset:
     '''Preprocess a dataset to NER by tokenizing and aligning the labels.
 
     Args:
@@ -17,7 +17,8 @@ def ner_preprocess_data(dataset: Dataset,
         only_label_first_subtoken (bool, optional):
             Whether only the first subtoken in each token should be labelled,
             with the rest of the subtokens being ignored for the purposes of
-            evaluation. Useful for test sets, not for training sets.
+            evaluation. Useful for test sets, not for training sets. Defaults
+            to True.
 
     Returns:
         HuggingFace dataset: The preprocessed dataset.
