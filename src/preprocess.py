@@ -4,7 +4,9 @@ from datasets import Dataset
 from .labels import NER_LABELS
 
 
-def ner_preprocess_data(dataset: Dataset, tokenizer) -> Dataset:
+def ner_preprocess_data(dataset: Dataset,
+                        tokenizer,
+                        only_label_first_subtoken: bool = False) -> Dataset:
     '''Preprocess a dataset to NER by tokenizing and aligning the labels.
 
     Args:
@@ -12,6 +14,10 @@ def ner_preprocess_data(dataset: Dataset, tokenizer) -> Dataset:
             The dataset to preprocess.
         tokenizer (HuggingFace tokenizer):
             A pretrained tokenizer.
+        only_label_first_subtoken (bool, optional):
+            Whether only the first subtoken in each token should be labelled,
+            with the rest of the subtokens being ignored for the purposes of
+            evaluation. Useful for test sets, not for training sets.
 
     Returns:
         HuggingFace dataset: The preprocessed dataset.
@@ -57,11 +63,15 @@ def ner_preprocess_data(dataset: Dataset, tokenizer) -> Dataset:
                     label_id = label2id[label]
                     label_ids.append(label_id)
 
-                # For the other tokens in a word also set the same label
+                # For the other tokens in a word set the label to -100, unless
+                # `only_label_first_subtoken` is True.
                 else:
-                    label = labels[word_idx]
-                    label_id = label2id[label]
-                    label_ids.append(label_id)
+                    if only_label_first_subtoken:
+                        label_ids.append(-100)
+                    else:
+                        label = labels[word_idx]
+                        label_id = label2id[label]
+                        label_ids.append(label_id)
 
                 previous_word_idx = word_idx
 
