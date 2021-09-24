@@ -57,9 +57,11 @@ def ner_preprocess_data(dataset: Dataset, tokenizer) -> Dataset:
                     label_id = label2id[label]
                     label_ids.append(label_id)
 
-                # For the other tokens in a word, we set the label to -100
+                # For the other tokens in a word also set the same label
                 else:
-                    label_ids.append(-100)
+                    label = labels[word_idx]
+                    label_id = label2id[label]
+                    label_ids.append(label_id)
 
                 previous_word_idx = word_idx
 
