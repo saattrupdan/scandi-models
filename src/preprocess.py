@@ -23,7 +23,13 @@ def sent_preprocess_data(dataset: Dataset, tokenizer) -> Dataset:
     tokenised = dataset.map(tokenise, batched=True)
 
     def create_numerical_labels(examples: dict) -> dict:
-        examples['label'] = [SENT_LABELS.index(lbl)
+        conversion_dict = dict(Negative='Negative',
+                               negativ='Negative',
+                               neutral='Neutral',
+                               Neutral='Neutral',
+                               positiv='Positive',
+                               Positive='Positive')
+        examples['label'] = [SENT_LABELS.index(conversion_dict[lbl])
                              for lbl in examples['orig_label']]
         return examples
 
