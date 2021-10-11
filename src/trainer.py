@@ -93,8 +93,7 @@ def get_sent_trainer(df: pd.DataFrame,
     # Set up test dataset
     _, X_test, _, y_test = load_dataset('angry-tweets')
     test_df = pd.concat((X_test, y_test), axis=1)
-    test_dataset_dct = dict(doc=test_df.text,
-                            orig_label=test_df.label)
+    test_dataset_dct = dict(doc=test_df.text, orig_label=test_df.label)
     test_dataset = Dataset.from_dict(test_dataset_dct)
     test_dataset = sent_preprocess_data(test_dataset, tokenizer)
 
