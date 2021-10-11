@@ -18,7 +18,10 @@ def sent_preprocess_data(dataset: Dataset, tokenizer) -> Dataset:
     '''
     def tokenise(examples: dict) -> dict:
         doc = examples['doc']
-        return tokenizer(doc, truncation=True, padding=True)
+        return tokenizer(doc,
+                         truncation=True,
+                         padding=True,
+                         max_length=512)
 
     tokenised = dataset.map(tokenise, batched=True)
 
