@@ -1,7 +1,35 @@
 '''Preprocess data'''
 
 from datasets import Dataset
-from .labels import NER_LABELS
+from .labels import NER_LABELS, SENT_LABELS
+
+
+def sent_preprocess_data(dataset: Dataset, tokenizer) -> Dataset:
+    '''Preprocess a dataset to sentiment analysis by tokenizing the labels.
+
+    Args:
+        dataset (HuggingFace dataset):
+            The dataset to preprocess.
+        tokenizer (HuggingFace tokenizer):
+            A pretrained tokenizer.
+
+    Returns:
+        HuggingFace dataset: The preprocessed dataset.
+    '''
+    def tokenise(examples: dict) -> dict:
+        doc = examples['doc']
+        return tokenizer(doc, truncation=True, padding=True)
+
+    tokenised = dataset.map(tokenise, batched=True)
+
+    def create_numerical_labels(examples: dict) -> dict:
+        examples['label'] = [SENT_LABELS.index(lbl)
+                             for lbl in examples['orig_label']]
+        return examples
+
+    preprocessed = tokenised.map(create_numerical_labels, batched=True)
+
+    return preprocessed.remove_columns(['doc', 'orig_label'])
 
 
 def ner_preprocess_data(dataset: Dataset,
