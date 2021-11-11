@@ -67,13 +67,13 @@ def ner_compute_metrics(predictions_and_labels: tuple) -> Dict[str, float]:
     # Remove MISC labels from predictions
     for i, prediction_list in enumerate(predictions):
         for j, ner_tag in enumerate(prediction_list):
-            if ner_tag[-4:] == 'MISC':
+            if ner_tag[-4:] not in ['-PER', '-LOC', '-ORG']:
                 predictions[i][j] = 'O'
 
     # Remove MISC labels from labels
     for i, label_list in enumerate(labels):
         for j, ner_tag in enumerate(label_list):
-            if ner_tag[-4:] == 'MISC':
+            if ner_tag[-4:] not in ['-PER', '-LOC', '-ORG']:
                 labels[i][j] = 'O'
 
     results_no_misc = metric.compute(predictions=predictions,
