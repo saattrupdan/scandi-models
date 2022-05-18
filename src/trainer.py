@@ -12,9 +12,9 @@ from transformers import (Trainer,
                           DataCollatorWithPadding,
                           EarlyStoppingCallback)
 
-from .model import get_ner_model, get_sent_model
-from .preprocess import ner_preprocess_data, sent_preprocess_data
-from .compute_metrics import ner_compute_metrics, sent_compute_metrics
+from .model import get_ner_model, get_bin_model
+from .preprocess import ner_preprocess_data, bin_preprocess_data
+from .compute_metrics import ner_compute_metrics, bin_compute_metrics
 
 
 logging_fmt = '%(asctime)s [%(levelname)s] %(message)s'
@@ -22,14 +22,17 @@ logger = logging.getLogger(__name__)
 #tf_logging.set_verbosity_error()
 
 
-def get_sent_trainer(df: pd.DataFrame,
-                     pretrained_model_id: str,
-                     new_model_id: str) -> Tuple[Trainer, Dataset]:
-    '''Prepare data for SENT training.
+def get_bin_trainer(train: Dataset,
+                    val: Dataset,
+                    pretrained_model_id: str,
+                    new_model_id: str) -> Tuple[Trainer, Dataset]:
+    '''Prepare data for BIN training.
 
     Args:
-        df (Pandas DataFrame):
-            Input data, with columns 'text' and 'label'.
+        train (Dataset):
+            Input training data, with columns 'text' and 'label'.
+        val (Dataset):
+            Input validation data, with columns 'text' and 'label'.
         pretrained_model_id (str):
             The model ID of a pretrained model.
         new_model_id (str):
@@ -42,15 +45,12 @@ def get_sent_trainer(df: pd.DataFrame,
     '''
     # Load model and tokenizer
     logger.info('Loading model')
-    model, tokenizer = get_sent_model(pretrained_model_id)
-
-    # Convert dataframe to HuggingFace Dataset
-    dataset_dct = dict(doc=df.text, orig_label=df.label)
-    dataset = Dataset.from_dict(dataset_dct)
+    model, tokenizer = get_bin_model(pretrained_model_id)
 
     # Tokenize and align labels
     logger.info('Tokenising dataset')
-    dataset = sent_preprocess_data(dataset, tokenizer)
+    train = bin_preprocess_data(train, tokenizer)
+    val = bin_preprocess_data(val, tokenizer)
 
     # Set up training arguments
     training_args = TrainingArguments(
@@ -63,16 +63,12 @@ def get_sent_trainer(df: pd.DataFrame,
         per_device_train_batch_size=8,
         per_device_eval_batch_size=8,
         learning_rate=2e-5,
-        num_train_epochs=1000,
-        warmup_steps=len(dataset) * 0.9,
+        num_train_epochs=100,
+        warmup_ratio=0.1,
         gradient_accumulation_steps=4,
-        metric_for_best_model='macro_f1',
-        load_best_model_at_end=True,
-        push_to_hub=True
+        metric_for_best_model='mcc',
+        load_best_model_at_end=True
     )
-
-    # Split the dataset into a training and validation dataset
-    split = dataset.train_test_split(0.1, seed=4242)
 
     # Set up data collator for feeding the data into the model
     data_collator = DataCollatorWithPadding(tokenizer, padding='longest')
@@ -83,22 +79,15 @@ def get_sent_trainer(df: pd.DataFrame,
     # Initialise the Trainer object
     trainer = Trainer(model=model,
                       args=training_args,
-                      train_dataset=split['train'],
-                      eval_dataset=split['test'],
+                      train_dataset=train,
+                      eval_dataset=val,
                       tokenizer=tokenizer,
                       data_collator=data_collator,
-                      compute_metrics=sent_compute_metrics,
+                      compute_metrics=bin_compute_metrics,
                       callbacks=[early_stopping])
 
-    # Set up test dataset
-    _, X_test, _, y_test = load_dataset('angry-tweets')
-    test_df = pd.concat((X_test, y_test), axis=1)
-    test_dataset_dct = dict(doc=test_df.text, orig_label=test_df.label)
-    test_dataset = Dataset.from_dict(test_dataset_dct)
-    test_dataset = sent_preprocess_data(test_dataset, tokenizer)
-
-    # Return the trainer, the training dataset and the validation dataset
-    return trainer, test_dataset
+    # Return the trainer
+    return trainer
 
 
 def get_ner_trainer(df: pd.DataFrame,

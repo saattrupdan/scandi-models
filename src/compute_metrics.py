@@ -6,8 +6,8 @@ from datasets import load_metric
 from .labels import NER_LABELS
 
 
-def sent_compute_metrics(predictions_and_labels: tuple) -> Dict[str, float]:
-    '''Compute the metrics needed for SENT evaluation.
+def bin_compute_metrics(predictions_and_labels: tuple) -> Dict[str, float]:
+    '''Compute the metrics needed for BIN evaluation.
 
     Args:
         predictions_and_labels (pair of arrays):
@@ -19,15 +19,13 @@ def sent_compute_metrics(predictions_and_labels: tuple) -> Dict[str, float]:
             A dictionary with the names of the metrics as keys and the
             metric values as values.
     '''
-    metric = load_metric('f1')
+    metric = load_metric('matthews_correlation')
 
     predictions, labels = predictions_and_labels
     predictions = predictions.argmax(axis=-1)
-    results = metric.compute(predictions=predictions,
-                             references=labels,
-                             average='macro')
+    results = metric.compute(predictions=predictions, references=labels)
 
-    return dict(macro_f1=results['f1'])
+    return dict(mcc=results['matthews_correlation'])
 
 
 def ner_compute_metrics(predictions_and_labels: tuple) -> Dict[str, float]:

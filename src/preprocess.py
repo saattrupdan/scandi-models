@@ -1,11 +1,11 @@
 '''Preprocess data'''
 
 from datasets import Dataset
-from .labels import NER_LABELS, SENT_LABELS
+from .labels import NER_LABELS, BIN_LABELS
 
 
-def sent_preprocess_data(dataset: Dataset, tokenizer) -> Dataset:
-    '''Preprocess a dataset to sentiment analysis by tokenizing the labels.
+def bin_preprocess_data(dataset: Dataset, tokenizer) -> Dataset:
+    '''Preprocess a dataset to binary classification by tokenizing the labels.
 
     Args:
         dataset (HuggingFace dataset):
@@ -26,13 +26,7 @@ def sent_preprocess_data(dataset: Dataset, tokenizer) -> Dataset:
     tokenised = dataset.map(tokenise, batched=True)
 
     def create_numerical_labels(examples: dict) -> dict:
-        conversion_dict = dict(Negative='Negative',
-                               negativ='Negative',
-                               neutral='Neutral',
-                               Neutral='Neutral',
-                               positiv='Positive',
-                               Positive='Positive')
-        examples['label'] = [SENT_LABELS.index(conversion_dict[lbl])
+        examples['label'] = [BIN_LABELS.index(lbl)
                              for lbl in examples['orig_label']]
         return examples
 
