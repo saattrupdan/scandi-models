@@ -41,7 +41,7 @@ def main():
         )
 
         # Set transformers logging back to error
-        tf_logging.set_verbosity_error()
+        #tf_logging.set_verbosity_error()
 
         # Remove trainer logging
         trainer.log = lambda _: None
