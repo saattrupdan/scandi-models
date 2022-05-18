@@ -116,7 +116,7 @@ def main():
             print(metrics)
 
             # Push model to the Hugging Face Hub
-            trainer.push_to_hub()
+            # trainer.push_to_hub()
 
         print()
 
