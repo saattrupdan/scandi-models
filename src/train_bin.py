@@ -36,48 +36,48 @@ def main():
         models = [
             'KBLab/bert-base-swedish-cased-new',
             # da=16%
-            # nb=%
-            # nn=%
+            # nb=0%
+            # nn=22%
             # sv=%
             # is=%
             # fo=%
 
             'patrickvonplaten/norwegian-roberta-base',
-            # da=58%
-            # nb=%
-            # nn=%
+            # da=36%
+            # nb=49%
+            # nn=45%
             # sv=%
             # is=%
             # fo=%
 
             'Maltehb/aelaectra-danish-electra-small-cased',
             # da=60%
-            # nb=%
-            # nn=%
+            # nb=35%
+            # nn=21%
             # sv=%
             # is=%
             # fo=%
 
             'vesteinn/IceBERT',
             # da=0%
-            # nb=%
-            # nn=%
+            # nb=0%
+            # nn=8%
             # sv=%
             # is=%
             # fo=%
 
             'TurkuNLP/bert-base-finnish-cased-v1',
             # da=0%
-            # nb=%
-            # nn=%
+            # nb=0%
+            # nn=0%
             # sv=%
             # is=%
             # fo=%
 
             'vesteinn/ScandiBERT',
             # da=59%
-            # nb=%
-            # nn=%
+            # nb=61%
+            # nn=52%
             # sv=%
             # is=%
             # fo=%
