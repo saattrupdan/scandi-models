@@ -14,6 +14,7 @@ def main():
 
     # Get arguments
     language = sys.argv[1]
+    print(f'Benchmarking {language} dataset')
 
     # Disable logging
     disable_progress_bar()
@@ -69,6 +70,8 @@ def main():
 
         print(model)
         print(metrics)
+
+    print()
 
 
 if __name__ == '__main__':
