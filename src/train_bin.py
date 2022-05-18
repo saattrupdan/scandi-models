@@ -42,7 +42,7 @@ def main():
             # is=%
             # fo=%
 
-            #'patrickvonplaten/norwegian-roberta-base',
+            'patrickvonplaten/norwegian-roberta-base',
             # da=58%
             # nb=%
             # nn=%
@@ -50,8 +50,8 @@ def main():
             # is=%
             # fo=%
 
-            'Maltehb/aelaectra-danish-electra-small-cased',#'Maltehb/danish-bert-botxo',
-            # da=34%
+            #'Maltehb/aelaectra-danish-electra-small-cased',
+            # da=60%
             # nb=%
             # nn=%
             # sv=%
