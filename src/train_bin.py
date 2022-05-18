@@ -1,7 +1,7 @@
 '''Train a binary classification model.'''
 
 from datasets import load_dataset
-from datasets.utils import disable_progress_bar
+from datasets.utils import disable_progress_bar, logging as ds_logging
 import transformers.utils.logging as tf_logging
 from transformers import ProgressCallback, PrinterCallback
 import logging
@@ -13,6 +13,7 @@ def main():
 
     disable_progress_bar()
     tf_logging.set_verbosity_error()
+    ds_logging.set_verbosity_error()
     logging.getLogger('filelock').setLevel(logging.ERROR)
     logging.getLogger('absl').setLevel(logging.ERROR)
 
