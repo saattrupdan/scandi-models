@@ -31,10 +31,10 @@ def main():
 
     # Get the trainer
     models = [
-        'KBLab/bert-base-swedish-cased-new',  # da=0%, nb=0%, nn=%, sv=68%, is=0%, fo=%
-        'NbAiLab/nb-bert-base',  # da=46%, nb=66%, nn=%, sv=61%, is=4%, fo=%
-        'Maltehb/danish-bert-botxo',  # da=24%, nb=5%, nn=%, sv=0%, is=0%, fo=%
-        'vesteinn/IceBERT',  # da=0%, nb=0%, nn=%, sv=0%, is=0%, fo=%
+        'KBLab/bert-base-swedish-cased-new',  # da=0%, nb=0%, nn=%, sv=68%, is=0%, fo=0%
+        'NbAiLab/nb-bert-base',  # da=46%, nb=66%, nn=%, sv=61%, is=4%, fo=0%
+        'Maltehb/danish-bert-botxo',  # da=24%, nb=5%, nn=%, sv=0%, is=0%, fo=0%
+        'vesteinn/IceBERT',  # da=0%, nb=0%, nn=%, sv=0%, is=0%, fo=42%
         'TurkuNLP/bert-base-finnish-cased-v1',  # da=0%, nb=0%, nn=%, sv=0%, is=0%, fo=%
         'vesteinn/ScandiBERT'  # da=56%, nb=62%, nn=%, sv=62%, is=61%, fo=%
     ]

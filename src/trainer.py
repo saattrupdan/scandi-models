@@ -79,7 +79,7 @@ def get_bin_trainer(train: Dataset,
     data_collator = DataCollatorWithPadding(tokenizer, padding='longest')
 
     # Set up early stopping callback
-    early_stopping = EarlyStoppingCallback(early_stopping_patience=2)
+    early_stopping = EarlyStoppingCallback(early_stopping_patience=10)
 
     # Initialise the Trainer object
     trainer = Trainer(model=model,
