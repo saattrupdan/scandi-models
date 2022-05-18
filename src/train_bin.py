@@ -14,9 +14,9 @@ def main():
 
     # Get the trainer
     models = [
-        'KBLab/bert-base-swedish-cased-new',  # 75% acc
-        'NbAiLab/nb-bert-base',  # 82% acc
-        'Maltehb/danish-bert-botxo',  # 72% acc
+        'KBLab/bert-base-swedish-cased-new',  # 0%
+        'NbAiLab/nb-bert-base',  # 57%
+        'Maltehb/danish-bert-botxo',  #
         'vesteinn/IceBERT',  # 75% acc
         'TurkuNLP/bert-base-finnish-cased-v1',  # 75% acc
         'vesteinn/ScandiBERT'  # 83% acc
