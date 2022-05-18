@@ -50,7 +50,7 @@ def main():
         trainer.remove_callback(PrinterCallback)
 
         # Remove the progress bar callback
-        trainer.remove_callback(ProgressCallback)
+        #trainer.remove_callback(ProgressCallback)
 
         # Train the model
         trainer.train()
