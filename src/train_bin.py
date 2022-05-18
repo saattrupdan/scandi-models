@@ -22,7 +22,7 @@ def main():
         'vesteinn/ScandiBERT'
     ]
     for model in models:
-        trainer, test = get_bin_trainer(
+        trainer, new_test = get_bin_trainer(
             train=train,
             val=val,
             test=test,
@@ -34,7 +34,7 @@ def main():
         trainer.train()
 
         # Evaluate the model on the test set
-        metrics = trainer.evaluate(test)
+        metrics = trainer.evaluate(new_test)
 
         print(model)
         print(metrics)
