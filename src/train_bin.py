@@ -7,9 +7,12 @@ from .trainer import get_bin_trainer
 def main():
 
     # Load the datasets
-    train = load_dataset('saattrupdan/grammar-correction-da', split='train')
-    val = load_dataset('saattrupdan/grammar-correction-da', split='val')
-    test = load_dataset('saattrupdan/grammar-correction-da', split='test')
+    dataset_id = 'saattrupdan/grammar-correction-nb'
+    train = load_dataset(dataset_id, split='train')
+    val = load_dataset(dataset_id, split='val')
+    test = load_dataset(dataset_id, split='test')
+
+    breakpoint()
 
     # Get the trainer
     trainer = get_bin_trainer(
