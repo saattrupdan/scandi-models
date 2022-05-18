@@ -12,19 +12,19 @@ def main():
     tf_logging.set_verbosity_error()
 
     # Load the datasets
-    dataset_id = 'saattrupdan/grammar-correction-da'
+    dataset_id = 'saattrupdan/grammar-correction-nb'
     train = load_dataset(dataset_id, split='small_train')
     val = load_dataset(dataset_id, split='val')
     test = load_dataset(dataset_id, split='test')
 
     # Get the trainer
     models = [
-        'KBLab/bert-base-swedish-cased-new',  # 0%
-        'NbAiLab/nb-bert-base',  # 60%
-        'Maltehb/danish-bert-botxo',  # 27%
-        'vesteinn/IceBERT',  # 0%
-        'TurkuNLP/bert-base-finnish-cased-v1',  # 0%
-        'vesteinn/ScandiBERT'  # 66%
+        'KBLab/bert-base-swedish-cased-new',  # da=0%, nb=%, sv=%, is=%
+        'NbAiLab/nb-bert-base',  # da=46%, nb=%, sv=%, is=%
+        'Maltehb/danish-bert-botxo',  # da=24%, nb=%, sv=%, is=%
+        'vesteinn/IceBERT',  # da=0%, nb=%, sv=%, is=%
+        'TurkuNLP/bert-base-finnish-cased-v1',  # da=%, nb=%, sv=%, is=%
+        'vesteinn/ScandiBERT'  # da=%, nb=%, sv=%, is=%
     ]
     for model in models:
         trainer, new_test = get_bin_trainer(
