@@ -57,7 +57,7 @@ def get_bin_trainer(train: Dataset,
     training_args = TrainingArguments(
         output_dir=new_model_id,
         evaluation_strategy='steps',
-        logging_strategy='steps',
+        logging_strategy='no',
         save_strategy='steps',
         eval_steps=30,
         logging_steps=30,
