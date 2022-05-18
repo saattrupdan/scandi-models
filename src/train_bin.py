@@ -7,7 +7,7 @@ from .trainer import get_bin_trainer
 def main():
 
     # Load the datasets
-    train = load_dataset('saattrupdan/grammar-correction-da', split='small_train')
+    train = load_dataset('saattrupdan/grammar-correction-da', split='train')
     val = load_dataset('saattrupdan/grammar-correction-da', split='val')
     test = load_dataset('saattrupdan/grammar-correction-da', split='test')
 
