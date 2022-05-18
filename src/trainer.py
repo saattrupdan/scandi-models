@@ -3,6 +3,7 @@
 import pandas as pd
 from typing import Tuple
 from datasets import Dataset
+import logging
 #from scandeval import load_dataset
 from transformers import (Trainer,
                           TrainingArguments,
@@ -13,6 +14,10 @@ from transformers import (Trainer,
 from .model import get_ner_model, get_bin_model
 from .preprocess import ner_preprocess_data, bin_preprocess_data
 from .compute_metrics import ner_compute_metrics, bin_compute_metrics
+
+
+logging_fmt = '%(asctime)s [%(levelname)s] %(message)s'
+logger = logging.getLogger(__name__)
 
 
 def get_bin_trainer(train: Dataset,
