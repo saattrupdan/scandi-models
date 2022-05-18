@@ -67,7 +67,7 @@ def get_bin_trainer(train: Dataset,
         num_train_epochs=100,
         warmup_ratio=0.1,
         gradient_accumulation_steps=1,
-        metric_for_best_model='val_loss',
+        metric_for_best_model='loss',
         load_best_model_at_end=True
     )
 
