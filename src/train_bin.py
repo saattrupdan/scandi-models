@@ -1,10 +1,15 @@
 '''Train a binary classification model.'''
 
 from datasets import load_dataset
+from datasets.utils import disable_progress_bar
+import transformers.logging as tf_logging
 from .trainer import get_bin_trainer
 
 
 def main():
+
+    disable_progress_bar()
+    tf_logging.set_verbosity_error()
 
     # Load the datasets
     dataset_id = 'saattrupdan/grammar-correction-da'
