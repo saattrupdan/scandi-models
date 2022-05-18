@@ -11,13 +11,12 @@ from .utils import NeverLeaveProgressCallback
 
 def main():
 
+    # Disable logging
     disable_progress_bar()
     tf_logging.set_verbosity_error()
     ds_logging.set_verbosity_error()
     logging.getLogger('filelock').setLevel(logging.ERROR)
     logging.getLogger('absl').setLevel(logging.ERROR)
-
-    # Disable logging from trainer.py
     logging.getLogger('transformers.trainer').setLevel(logging.ERROR)
 
     # Load the datasets
