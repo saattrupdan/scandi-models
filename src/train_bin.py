@@ -6,13 +6,10 @@ from .trainer import get_bin_trainer
 
 def main():
 
-    # Load the dataset dictionary
-    dataset_dict = load_dataset('saattrupdan/grammar-correction-da')
-
-    # Extract the training, validation and test splits
-    train = dataset_dict['small_train']
-    val = dataset_dict['val']
-    test = dataset_dict['test']
+    # Load the datasets
+    train = load_dataset('saattrupdan/grammar-correction-da', split='small_train')
+    val = load_dataset('saattrupdan/grammar-correction-da', split='val')
+    test = load_dataset('saattrupdan/grammar-correction-da', split='test')
 
     # Get the trainer
     trainer = get_bin_trainer(
