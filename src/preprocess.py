@@ -17,7 +17,7 @@ def bin_preprocess_data(dataset: Dataset, tokenizer) -> Dataset:
         HuggingFace dataset: The preprocessed dataset.
     '''
     def tokenise(examples: dict) -> dict:
-        doc = examples['doc']
+        doc = examples['text']
         return tokenizer(doc,
                          truncation=True,
                          padding=True,
@@ -32,7 +32,7 @@ def bin_preprocess_data(dataset: Dataset, tokenizer) -> Dataset:
 
     preprocessed = tokenised.map(create_numerical_labels, batched=True)
 
-    return preprocessed.remove_columns(['doc', 'orig_label'])
+    return preprocessed.remove_columns(['text', 'orig_label'])
 
 
 def ner_preprocess_data(dataset: Dataset,
