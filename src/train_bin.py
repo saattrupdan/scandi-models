@@ -44,16 +44,16 @@ def main():
         )
 
         # Set transformers logging back to error
-        #tf_logging.set_verbosity_error()
+        tf_logging.set_verbosity_error()
 
         # Remove trainer logging
         trainer.log = lambda _: None
 
         # Remove the callback which prints the metrics after each evaluation
-        #trainer.remove_callback(PrinterCallback)
+        trainer.remove_callback(PrinterCallback)
 
         # Remove the progress bar callback
-        #trainer.remove_callback(ProgressCallback)
+        trainer.remove_callback(ProgressCallback)
 
         trainer.add_callback(NeverLeaveProgressCallback)
 
