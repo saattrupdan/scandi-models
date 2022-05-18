@@ -41,47 +41,47 @@ def main():
             # nn=22%
             # sv=64%
             # is=9%
-            # fo=%
+            # fo=0%
 
             'patrickvonplaten/norwegian-roberta-base',
             # da=36%
             # nb=49%
             # nn=45%
             # sv=19%
-            # is=%
-            # fo=%
+            # is=0%
+            # fo=43%
 
             'Maltehb/aelaectra-danish-electra-small-cased',
             # da=60%
             # nb=35%
             # nn=21%
             # sv=9%
-            # is=%
-            # fo=%
+            # is=0%
+            # fo=-2%
 
             'vesteinn/IceBERT',
             # da=0%
             # nb=0%
             # nn=8%
             # sv=0%
-            # is=%
-            # fo=%
+            # is=63%
+            # fo=39%
 
             'TurkuNLP/bert-base-finnish-cased-v1',
             # da=0%
             # nb=0%
             # nn=0%
             # sv=0%
-            # is=%
-            # fo=%
+            # is=1%
+            # fo=0%
 
             'vesteinn/ScandiBERT',
             # da=59%
             # nb=61%
             # nn=52%
             # sv=0% ??
-            # is=%
-            # fo=%
+            # is=59%
+            # fo=47%
         ]
         for model in models:
             trainer, new_test = get_bin_trainer(
