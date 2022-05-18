@@ -5,11 +5,15 @@ from datasets.utils import disable_progress_bar, logging as ds_logging
 import transformers.utils.logging as tf_logging
 from transformers import ProgressCallback, PrinterCallback
 import logging
+import sys
 from .trainer import get_bin_trainer
 from .utils import NeverLeaveProgressCallback
 
 
 def main():
+
+    # Get arguments
+    language = sys.argv[1]
 
     # Disable logging
     disable_progress_bar()
@@ -20,7 +24,7 @@ def main():
     logging.getLogger('transformers.trainer').setLevel(logging.ERROR)
 
     # Load the datasets
-    dataset_id = 'saattrupdan/grammar-correction-fo'
+    dataset_id = f'saattrupdan/grammar-correction-{language}'
     train = load_dataset(dataset_id, split='small_train')
     val = load_dataset(dataset_id, split='val')
     test = load_dataset(dataset_id, split='test')
