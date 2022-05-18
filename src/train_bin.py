@@ -50,10 +50,10 @@ def main():
         trainer.log = lambda _: None
 
         # Remove the callback which prints the metrics after each evaluation
-        trainer.remove_callback(PrinterCallback)
+        #trainer.remove_callback(PrinterCallback)
 
         # Remove the progress bar callback
-        trainer.remove_callback(ProgressCallback)
+        #trainer.remove_callback(ProgressCallback)
 
         trainer.add_callback(NeverLeaveProgressCallback)
 
