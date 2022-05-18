@@ -27,12 +27,12 @@ def bin_preprocess_data(dataset: Dataset, tokenizer) -> Dataset:
 
     def create_numerical_labels(examples: dict) -> dict:
         examples['label'] = [BIN_LABELS.index(lbl)
-                             for lbl in examples['orig_label']]
+                             for lbl in examples['label']]
         return examples
 
     preprocessed = tokenised.map(create_numerical_labels, batched=True)
 
-    return preprocessed.remove_columns(['text', 'orig_label'])
+    return preprocessed.remove_columns(['text'])
 
 
 def ner_preprocess_data(dataset: Dataset,
