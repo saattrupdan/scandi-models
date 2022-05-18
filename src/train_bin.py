@@ -12,8 +12,6 @@ def main():
     val = load_dataset(dataset_id, split='val')
     test = load_dataset(dataset_id, split='test')
 
-    breakpoint()
-
     # Get the trainer
     trainer = get_bin_trainer(
         train=train,
