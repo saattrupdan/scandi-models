@@ -17,6 +17,7 @@ from .compute_metrics import ner_compute_metrics, bin_compute_metrics
 
 
 logging_fmt = '%(asctime)s [%(levelname)s] %(message)s'
+logging.basicConfig(level=logging.INFO, format=logging_fmt)
 logger = logging.getLogger(__name__)
 
 
