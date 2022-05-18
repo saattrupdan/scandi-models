@@ -33,20 +33,21 @@ def main():
         test = load_dataset(dataset_id, split='test')
 
         # Get the trainer
+        # NOTE: These scores are with early stopping patience 10!
         models = [
             'KBLab/bert-base-swedish-cased-new',
             # da=16%
-            # nb=0%
+            # nb=0% ??
             # nn=22%
-            # sv=%
-            # is=%
+            # sv=64%
+            # is=9%
             # fo=%
 
             'patrickvonplaten/norwegian-roberta-base',
             # da=36%
             # nb=49%
             # nn=45%
-            # sv=%
+            # sv=19%
             # is=%
             # fo=%
 
@@ -54,7 +55,7 @@ def main():
             # da=60%
             # nb=35%
             # nn=21%
-            # sv=%
+            # sv=9%
             # is=%
             # fo=%
 
@@ -62,7 +63,7 @@ def main():
             # da=0%
             # nb=0%
             # nn=8%
-            # sv=%
+            # sv=0%
             # is=%
             # fo=%
 
@@ -70,7 +71,7 @@ def main():
             # da=0%
             # nb=0%
             # nn=0%
-            # sv=%
+            # sv=0%
             # is=%
             # fo=%
 
@@ -78,7 +79,7 @@ def main():
             # da=59%
             # nb=61%
             # nn=52%
-            # sv=%
+            # sv=0% ??
             # is=%
             # fo=%
         ]
@@ -88,7 +89,7 @@ def main():
                 val=val,
                 test=test,
                 pretrained_model_id=model,
-                new_model_id='saattrupdan/grammar-checker-da'
+                new_model_id=f'saattrupdan/grammar-checker-{language}'
             )
 
             # Set transformers logging back to error
@@ -113,6 +114,9 @@ def main():
 
             print(model)
             print(metrics)
+
+            # Push model to the Hugging Face Hub
+            trainer.push_to_hub()
 
         print()
 
