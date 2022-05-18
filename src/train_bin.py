@@ -8,7 +8,7 @@ def main():
 
     # Load the datasets
     dataset_id = 'saattrupdan/grammar-correction-da'
-    train = load_dataset(dataset_id, split='train')
+    train = load_dataset(dataset_id, split='small_train')
     val = load_dataset(dataset_id, split='val')
     test = load_dataset(dataset_id, split='test')
 
