@@ -1,7 +1,7 @@
 '''Train a binary classification model.'''
 
 from datasets import load_dataset
-from trainer import get_bin_trainer
+from .trainer import get_bin_trainer
 
 
 def main():
