@@ -47,7 +47,7 @@ def main():
         #tf_logging.set_verbosity_error()
 
         # Remove trainer logging
-        #trainer.log = lambda _: None
+        trainer.log = lambda _: None
 
         # Remove the callback which prints the metrics after each evaluation
         #trainer.remove_callback(PrinterCallback)
