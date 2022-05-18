@@ -34,7 +34,7 @@ def main():
 
         # Get the trainer
         models = [
-            #'KBLab/bert-base-swedish-cased-new',
+            'KBLab/bert-base-swedish-cased-new',
             # da=16%
             # nb=%
             # nn=%
@@ -50,7 +50,7 @@ def main():
             # is=%
             # fo=%
 
-            #'Maltehb/aelaectra-danish-electra-small-cased',
+            'Maltehb/aelaectra-danish-electra-small-cased',
             # da=60%
             # nb=%
             # nn=%
@@ -58,7 +58,7 @@ def main():
             # is=%
             # fo=%
 
-            #'vesteinn/IceBERT',
+            'vesteinn/IceBERT',
             # da=0%
             # nb=%
             # nn=%
@@ -66,7 +66,7 @@ def main():
             # is=%
             # fo=%
 
-            #'TurkuNLP/bert-base-finnish-cased-v1',
+            'TurkuNLP/bert-base-finnish-cased-v1',
             # da=0%
             # nb=%
             # nn=%
@@ -74,7 +74,7 @@ def main():
             # is=%
             # fo=%
 
-            #'vesteinn/ScandiBERT',
+            'vesteinn/ScandiBERT',
             # da=59%
             # nb=%
             # nn=%
