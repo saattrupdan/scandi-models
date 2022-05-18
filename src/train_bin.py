@@ -14,7 +14,7 @@ def main():
     tf_logging.set_verbosity_error()
 
     # Disable logging from trainer.py
-    logging.getLogger('transformers.trainer').setLevel(logging.ERROR)
+    #logging.getLogger('transformers.trainer').setLevel(logging.ERROR)
 
     # Load the datasets
     dataset_id = 'saattrupdan/grammar-correction-is'
