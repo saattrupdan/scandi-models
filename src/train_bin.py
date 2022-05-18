@@ -8,18 +8,18 @@ def main():
 
     # Load the datasets
     dataset_id = 'saattrupdan/grammar-correction-da'
-    train = load_dataset(dataset_id, split='train')
+    train = load_dataset(dataset_id, split='small_train')
     val = load_dataset(dataset_id, split='val')
     test = load_dataset(dataset_id, split='test')
 
     # Get the trainer
     models = [
         'KBLab/bert-base-swedish-cased-new',  # 0%
-        'NbAiLab/nb-bert-base',  # 57%
-        'Maltehb/danish-bert-botxo',  #
-        'vesteinn/IceBERT',  # 75% acc
-        'TurkuNLP/bert-base-finnish-cased-v1',  # 75% acc
-        'vesteinn/ScandiBERT'  # 83% acc
+        'NbAiLab/nb-bert-base',  # 60%
+        'Maltehb/danish-bert-botxo',  # 27%
+        'vesteinn/IceBERT',  # 0%
+        'TurkuNLP/bert-base-finnish-cased-v1',  # 0%
+        'vesteinn/ScandiBERT'  # 66%
     ]
     for model in models:
         trainer, new_test = get_bin_trainer(
