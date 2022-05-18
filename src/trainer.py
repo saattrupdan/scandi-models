@@ -71,7 +71,8 @@ def get_bin_trainer(train: Dataset,
         warmup_ratio=0.01,
         gradient_accumulation_steps=2,
         metric_for_best_model='loss',
-        load_best_model_at_end=True
+        load_best_model_at_end=True,
+        optim='adamw_torch',
     )
 
     # Set up data collator for feeding the data into the model
