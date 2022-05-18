@@ -20,19 +20,19 @@ def main():
     logging.getLogger('transformers.trainer').setLevel(logging.ERROR)
 
     # Load the datasets
-    dataset_id = 'saattrupdan/grammar-correction-is'
+    dataset_id = 'saattrupdan/grammar-correction-fo'
     train = load_dataset(dataset_id, split='small_train')
     val = load_dataset(dataset_id, split='val')
     test = load_dataset(dataset_id, split='test')
 
     # Get the trainer
     models = [
-        'KBLab/bert-base-swedish-cased-new',  # da=0%, nb=0%, nn=%, sv=68%, is=%, fo=%
-        'NbAiLab/nb-bert-base',  # da=46%, nb=66%, nn=%, sv=61%, is=%, fo=%
-        'Maltehb/danish-bert-botxo',  # da=24%, nb=5%, nn=%, sv=0%, is=%, fo=%
-        'vesteinn/IceBERT',  # da=0%, nb=0%, nn=%, sv=0%, is=%, fo=%
-        'TurkuNLP/bert-base-finnish-cased-v1',  # da=0%, nb=0%, nn=%, sv=0%, is=%, fo=%
-        'vesteinn/ScandiBERT'  # da=56%, nb=62%, nn=%, sv=62%, is=%, fo=%
+        'KBLab/bert-base-swedish-cased-new',  # da=0%, nb=0%, nn=%, sv=68%, is=0%, fo=%
+        'NbAiLab/nb-bert-base',  # da=46%, nb=66%, nn=%, sv=61%, is=4%, fo=%
+        'Maltehb/danish-bert-botxo',  # da=24%, nb=5%, nn=%, sv=0%, is=0%, fo=%
+        'vesteinn/IceBERT',  # da=0%, nb=0%, nn=%, sv=0%, is=0%, fo=%
+        'TurkuNLP/bert-base-finnish-cased-v1',  # da=0%, nb=0%, nn=%, sv=0%, is=0%, fo=%
+        'vesteinn/ScandiBERT'  # da=56%, nb=62%, nn=%, sv=62%, is=61%, fo=%
     ]
     for model in models:
         trainer, new_test = get_bin_trainer(
