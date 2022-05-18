@@ -14,7 +14,7 @@ def main():
     tf_logging.set_verbosity_error()
 
     # Disable logging from trainer.py
-    #logging.getLogger('transformers.trainer').setLevel(logging.ERROR)
+    logging.getLogger('transformers.trainer').setLevel(logging.ERROR)
 
     # Load the datasets
     dataset_id = 'saattrupdan/grammar-correction-is'
@@ -47,10 +47,10 @@ def main():
         #trainer.log = lambda _: None
 
         # Remove the callback which prints the metrics after each evaluation
-        trainer.remove_callback(PrinterCallback)
+        #trainer.remove_callback(PrinterCallback)
 
         # Remove the progress bar callback
-        trainer.remove_callback(ProgressCallback)
+        #trainer.remove_callback(ProgressCallback)
 
         # Train the model
         trainer.train()
