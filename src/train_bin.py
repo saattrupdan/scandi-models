@@ -2,7 +2,7 @@
 
 from datasets import load_dataset
 from datasets.utils import disable_progress_bar
-import transformers.logging as tf_logging
+import transformers.utils.logging as tf_logging
 from .trainer import get_bin_trainer
 
 
