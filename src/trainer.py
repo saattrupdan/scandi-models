@@ -23,6 +23,7 @@ logger = logging.getLogger(__name__)
 
 def get_bin_trainer(train: Dataset,
                     val: Dataset,
+                    test: Dataset,
                     pretrained_model_id: str,
                     new_model_id: str) -> Tuple[Trainer, Dataset]:
     '''Prepare data for BIN training.
@@ -50,6 +51,7 @@ def get_bin_trainer(train: Dataset,
     logger.info('Tokenising dataset')
     train = bin_preprocess_data(train, tokenizer)
     val = bin_preprocess_data(val, tokenizer)
+    test = bin_preprocess_data(test, tokenizer)
 
     # Set up training arguments
     training_args = TrainingArguments(
@@ -73,7 +75,7 @@ def get_bin_trainer(train: Dataset,
     data_collator = DataCollatorWithPadding(tokenizer, padding='longest')
 
     # Set up early stopping callback
-    early_stopping = EarlyStoppingCallback(early_stopping_patience=2)
+    early_stopping = EarlyStoppingCallback(early_stopping_patience=10)
 
     # Initialise the Trainer object
     trainer = Trainer(model=model,
@@ -85,8 +87,8 @@ def get_bin_trainer(train: Dataset,
                       compute_metrics=bin_compute_metrics,
                       callbacks=[early_stopping])
 
-    # Return the trainer
-    return trainer
+    # Return the trainer and test set
+    return trainer, test
 
 
 def get_ner_trainer(df: pd.DataFrame,

@@ -13,9 +13,10 @@ def main():
     test = load_dataset(dataset_id, split='test')
 
     # Get the trainer
-    trainer = get_bin_trainer(
+    trainer, test = get_bin_trainer(
         train=train,
         val=val,
+        test=test,
         pretrained_model_id='Maltehb/aelaectra-danish-electra-small-cased',
         new_model_id='saattrupdan/grammar-checker-da'
     )
